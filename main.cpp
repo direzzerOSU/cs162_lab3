@@ -24,9 +24,6 @@ int main(){
          break;
       }
 
-      // run program
-      Game game = Game();
-
       // // request user input for the # of sides on each die
       // cout << "Please indicate how many sides each die should have while playing " << programName << ": ";
       // int sides;  // # of sides for each die
