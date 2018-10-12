@@ -1,10 +1,16 @@
+/*********************************************************************
+** Program name: War Game with Dice
+** Author: Ryan DiRezze
+** Date: October 14, 2018
+** Description:
+*********************************************************************/
+
 #include "menu.hpp"
-#include "countLetters.hpp"
 
 void menu(bool& result){
    // introduction
-   string program_name = "Ryan's Handy Dandy Letter Counter";
-   cout << "Hello! Welcome to Ryan's " << program_name << " program:" << endl;
+   string program_name = "Ryan's War Game";
+   cout << "Hello! Welcome to Ryan's " << program_name << " Program:" << endl;
 
    // user input to start the program or quit
    cout << "Please select an option from below:" << endl;
@@ -13,7 +19,7 @@ void menu(bool& result){
    char selection = ' ';
    cout << "Selection: ";
    cin >> selection;
-   // cout << endl;
+   cout << endl;
 
    // input validation until the user selects a valid option
    while(tolower(selection) != 'a' && tolower(selection) != 'b'){

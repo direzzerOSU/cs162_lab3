@@ -7,11 +7,11 @@ CXXFLAGS = -std=c++0x
 #CXXFLAGS += -O3
 #LDFLAGS = -lboost_date_time
 
-OBJS = countLetters.o main.o menu.o
+OBJS = main.o menu.o die.o loadedDie.o game.o inputValidation.o
 
-SRCS = countLetters.cpp main.cpp menu.cpp
+SRCS = main.cpp menu.cpp die.cpp loadedDie.cpp game.cpp inputValidation.cpp
 
-HEADERS = countLetters.hpp menu.hpp
+HEADERS = menu.hpp die.hpp loadedDie.hpp game.hpp inputValidation.hpp
 
 #target: dependencies
 #	rule to build
