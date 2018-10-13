@@ -6,8 +6,9 @@
 *********************************************************************/
 
 #include "menu.hpp"
+#include "die.hpp"
+#include "loadedDie.hpp"
 #include "game.hpp"
-#include "dice.hpp"
 
 int main(){
    cout << endl;

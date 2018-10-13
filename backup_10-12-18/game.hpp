@@ -9,12 +9,11 @@
 #define GAME_H
 
 #include "inputValidation.hpp"
-#include "dice.hpp"
+#include "die.hpp"
+#include "loadedDie.hpp"
 
 class Game{
 private:
-	Die* player1;
-	Die* player2;
    int player1_score = 0;
    int player2_score = 0;
    int maxRounds;
@@ -22,7 +21,7 @@ private:
 
 public:
    Game();
-   void play(Die*, Die*);
+   void play(int, int);
    void printScores();
    void score_player1();
    void score_player2();

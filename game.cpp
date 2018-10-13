@@ -9,12 +9,13 @@
 
 // initializes and runs the game: War
 Game::Game(){
-   cout << "How many rounds do you want to play?" << endl;
+   cout << "How many rounds do you want to play?" << endl << endl;
    cin >> maxRounds;
 
    intValidation(maxRounds);
 
    cout << "What type of die will each player have? A normal die or a loaded die?" << endl << endl;
+   
    cout << "Player 1: " << endl;
    cout << "   a. Normal Die" << endl;
    cout << "   b. Loaded Die" << endl << endl;
@@ -31,11 +32,12 @@ Game::Game(){
 
    cout << endl << "Player 2: " << endl;
    cout << "   a. Normal Die" << endl;
-   cout << "   b. Loaded Die" << endl << endl;
+   cout << "   b. Loaded Die" << endl;
 
    char selection2;
    while(tolower(selection2) != 'a' && tolower(selection2) != 'b'){
       cin >> selection2;
+      cout << endl;
 
       if(tolower(selection2) != 'a' && tolower(selection2) != 'b')
       {
@@ -43,119 +45,67 @@ Game::Game(){
       }
    }
 
-   // initialize player1's die
-   if(tolower(selection1) == 'a'){
-      Die player1 = Die();
-      if(tolower(selection2) == 'a'){
-         Die player2 = Die();
+   // initializing with a constructor (w/ parameter)
+   //cout << "How many sides should Player 1's die have?" << endl;
+   //cout << "How many sides should Player 2's die have?" << endl;
 
-         int rollValue1;
-         int rollValue2;
+   // initialize Player1's object
+   //if(tolower(selection1) == 'a'){
+	//	player1 = new Die();
+   //}
+   //else if(tolower(selection1) == 'b'){
+	//	player1 = new LoadedDie();
+   //}
 
-         while(currentRound <= maxRounds){
-            rollValue1 = player1.roll();
-            rollValue2 = player2.roll();
-            play(rollValue1, rollValue2);
-            cout << endl;
-            cout << "Player 1: " << endl;
-            cout << "   Die Type: Die" << endl;
-            cout << "   Roll:     " << rollValue1 << endl;
-            cout << "   Score:    " << getScore1() << endl << endl;
-            cout << "Player 2: " << endl;
-            cout << "   Die Type: Die" << endl;
-            cout << "   Roll:     " << rollValue2 << endl;
-            cout << "   Score:    " << getScore2() << endl;
-         }
-      }
-      else if(tolower(selection2) == 'b'){
-         LoadedDie player2 = LoadedDie();
-
-         int rollValue1;
-         int rollValue2;
-
-         while(currentRound <= maxRounds){
-            rollValue1 = player1.roll();
-            rollValue2 = player2.roll();
-            play(rollValue1, rollValue2);
-            cout << endl;
-            cout << "Player 1: " << endl;
-            cout << "   Die Type: Die" << endl;
-            cout << "   Roll:     " << rollValue1 << endl;
-            cout << "   Score:    " << getScore1() << endl << endl;
-            cout << "Player 2: " << endl;
-            cout << "   Die Type: LoadedDie" << endl;
-            cout << "   Roll:     " << rollValue2 << endl;
-            cout << "   Score:    " << getScore2() << endl;
-         }
-      }
+   // initialize Player2's object
+   if(tolower(selection2) == 'a'){
+		player2 = new Die();
    }
-   else if(tolower(selection1) == 'b'){
-      LoadedDie player1 = LoadedDie();
-      if(tolower(selection2) == 'a'){
-         Die player2 = Die();
+   else if(tolower(selection2) == 'b'){
+		player2 = new LoadedDie();
+   }
+  
+	cout << "Beginning game rounds..." << endl;
 
-         int rollValue1;
-         int rollValue2;
-
-         while(currentRound <= maxRounds){
-            rollValue1 = player1.roll();
-            rollValue2 = player2.roll();
-            play(rollValue1, rollValue2);
-            cout << endl;
-            cout << "Player 1: " << endl;
-            cout << "   Die Type: LoadedDie" << endl;
-            cout << "   Roll:     " << rollValue1 << endl;
-            cout << "   Score:    " << getScore1() << endl << endl;
-            cout << "Player 2: " << endl;
-            cout << "   Die Type: Die" << endl;
-            cout << "   Roll:     " << rollValue2 << endl;
-            cout << "   Score:    " << getScore2() << endl;
-         }
-      }
-      else if(tolower(selection2) == 'b'){
-         LoadedDie player2 = LoadedDie();
-
-         int rollValue1;
-         int rollValue2;
-
-         while(currentRound <= maxRounds){
-            rollValue1 = player1.roll();
-            rollValue2 = player2.roll();
-            play(rollValue1, rollValue2);
-            cout << endl;
-            cout << "Player 1: " << endl;
-            cout << "   Die Type: LoadedDie" << endl;
-            cout << "   Roll:     " << rollValue1 << endl;
-            cout << "   Score:    " << getScore1() << endl << endl;
-            cout << "Player 2: " << endl;
-            cout << "   Die Type: LoadedDie" << endl;
-            cout << "   Roll:     " << rollValue2 << endl;
-            cout << "   Score:    " << getScore2() << endl;
-         }
-      }
+   // play each round until the game completes
+   while(currentRound <= maxRounds){
+      play(player1, player2);
    }
 }
 
-void Game::play(int player1, int player2){
-   if(player1 > player2){
+void Game::play(Die* player1, Die* player2){
+   int value1 = player1->roll();
+   int value2 = player2->roll();
+
+   if(value1 > value2){
       score_player1();
    }
-   else if(player2 > player1){
+   else if(value2 > value1){
       score_player2();
    }
-   else if(player1 == player2){
+   else if(value1 == value2){
       // score is unchanged
    }
    else{
       cout << "Uh oh... There appears to be an issue with scoring." << endl;
    }
+   cout << "Player 1:  " << endl;
+   cout << "	Type:  " << player1->getType() << endl;
+   cout << "	Value: " << value1 << endl;
+
+   cout << "Player 2:  " << endl;
+   cout << "	Type:  " << player2->getType() << endl;
+   cout << "	Value: " << value2 << endl;
+
+   printScores();
+
    currentRound += 1;
 }
 
 void Game::printScores(){
-   cout << "Game Scores:" << endl;
+   cout << endl <<  "Game Scores:" << endl;
    cout << "   Player 1: " << getScore1() << endl;
-   cout << "   Player 2: " << getScore2() << endl;
+   cout << "   Player 2: " << getScore2() << endl << endl;
 }
 
 int Game::getScore1(){
